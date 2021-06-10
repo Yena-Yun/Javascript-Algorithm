@@ -8,22 +8,22 @@
 <body>
     <script>
         function solution(a, b, c) {
+            // answer를 미리 둘 중 한 값으로 초기화
             let answer = "YES";
             let max;
 
-            if (a > b && a > c) {
-                if (a >= b + c) {
-                    answer = "NO";
-                }
-            } else if (b > a && b > c) {
-                if (b >= a + c) {
-                    answer = "NO";
-                }
-            } else {
-                if (c >= b + c) {
-                    answer = "NO";
-                }
-            }
+            // 삼각형이 되는지 판별하려면 최대값을 제외한 숫자 두 개의 합이 최대값보다 커야 함
+            // 어느 것이 최대값이 될지 모르기 때문에 애초부터 세 값을 다 더한 변수를 만들고
+            // 거기서 최대값을 뺀다.
+            let sum = a + b + c;
+
+            // 최대값 구하기
+            if (a > b) max = a;
+            else max = b;
+            if (c > max) max = c;
+
+            // 실행문이 1줄인 경우는 중괄호 생략
+            if ((sum - max) <= max) answer = "NO";
 
             return answer;
         }
