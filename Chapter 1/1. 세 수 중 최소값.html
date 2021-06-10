@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        function solution(a, b, c) {
+            let answer;
+
+            // 실행문이 1줄인 경우에는 중괄호 생략 가능
+            if (a < b) answer = a;
+            else answer = b;
+            if (c < answer) answer = c;
+
+            return answer;
+        }
+
+        console.log(solution(2, 5, 1));
+    </script>
+</body>
+
+</html>
