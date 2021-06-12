@@ -8,7 +8,25 @@
 <body>
 	<script>
 		function solution(arr) {
+			//answer가 배열인 이유: 답이 2개여서 (답 2개를 answer에 push해서 반환)
 			let answer = [];
+			//let temp = [];
+			let sum = 0;
+			let min = Number.MAX_SAFE_INTEGER; //최소값은 이렇게 초기화하는 거 연습
+
+			//for (let i = 0; i < arr.length; i++) {
+			for (let x of arr) { //단순히 배열의 값만 꺼내는 건 for-of 쓰기
+				if (x % 2 == 1) {
+					sum += x;
+					//전역에서 min을 미리 초기화하면 temp 배열 안 써도 됨
+					if (x < min) min = x;
+
+					//temp.push(x);
+					//min = Math.min(...temp);
+				}
+			}
+
+			answer.push(sum, min);
 
 			return answer;
 		}
