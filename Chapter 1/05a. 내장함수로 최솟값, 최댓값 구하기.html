@@ -1,0 +1,24 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>내장함수로 최솟값, 최댓값 구하기: Math.min, Math.max</title>
+</head>
+
+<body>
+	<script>
+		function solution(arr) {
+			let answer = Math.min(...arr);
+			console.log(Math.max(...arr));
+			//Math.min에는 인자(개별숫자)로만 넘겨야 함: (3, 2, 7, 1, 11)
+			//	=> 배열(arr)을 넘기면 NaN(Not a Number) 출력
+			//		=> 배열을 넘길 때는 전개연산자(spread 연산자)로: (...arr)
+			return answer;
+		}
+
+		let arr = [5, 7, 1, 3, 2, 9, 11];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
