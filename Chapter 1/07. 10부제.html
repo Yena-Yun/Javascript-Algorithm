@@ -8,8 +8,21 @@
 <body>
 	<script>
 		function solution(day, arr) {
+			//answer가 count
 			let answer = 0;
 
+			//1. 숫자롤 문자열로 바꿔서 해결
+			//for (let i = 0; i < arr.length; i++) {
+			//arr의 i번째 숫자를 문자열로 바꾼 뒤 1의 자리만 구해서 day와 비교
+			//if (arr[i].toString()[1] == day) {
+			//	answer += 1;
+			//}
+			//}
+
+			//2. '1의 자리'가 '10'으로 나눈 '나머지'라는 걸 이용
+			for (let x of arr) {
+				if (x % 10 == day) answer++;
+			}
 
 			return answer;
 		}
