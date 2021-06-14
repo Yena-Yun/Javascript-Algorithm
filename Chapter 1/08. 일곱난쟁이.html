@@ -8,10 +8,39 @@
 <body>
 	<script>
 		function solution(arr) {
+			//얕은 복사 (=> answer와 arr 모두 같은 배열을 '가리킴' - 주소만 복사)
 			let answer = arr;
+			//reduce: 누적함수. a와 b를 가지고, a에 arr에서 꺼낸 하나하나의 원소(b)를 계속 더해준다.(2항 = a의 초기값)
+			let sum = arr.reduce((a, b) => a + b, 0); //2항의 0은 생략가능 (0이 기본값)
+			//console.log(sum); //140
 
+			//reduce 쓰면 for문 쓸 필요 x
+			//for (let x of arr) {
+			//	sum += x;
+			//}
 
-			return answer;
+			//i는 마지막에서 i(8) 다음 j(13)를 더해줘야 하므로 끝까지 돌 필요 없음
+			for (let i = 0; i < arr.length - 1; i++) {
+				//j는 i 바로 다음부터 시작
+				for (let j = i + 1; j < arr.length; j++) {
+					//console.log(arr[i], arr[j]);
+
+					//총합에서 두 값을 뺀 결과가 100이면 그 두 값의 난쟁이가 가짜라는 뜻
+					if ((sum - (arr[i] + arr[j])) === 100) {
+						//arr.splice(i, 1); //i번째부터 1개 삭제
+						//i를 삭제하고 나면 뒤의 값들이 한 칸씩 앞으로 당겨옴
+						//즉, 뒤의 j번째가 i번째가 됨
+						//그래서 이렇게 i를 한번 더 지우거나,
+						//arr.splice(i, 1);
+
+						//아니면 처음에 j번째를 지우고, 그 다음 i번째를 지우는 방법이 있음
+						arr.splice(j, 1);
+						arr.splice(i, 1);
+					}
+				}
+			}
+
+			return answer; //answer와 arr 모두 같은 곳을 가리키고 있으므로 answer 리턴은 arr 리턴과 동일
 		}
 
 		let arr = [20, 7, 23, 19, 10, 15, 25, 8, 13];
