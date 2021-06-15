@@ -9,7 +9,14 @@
 	<script>
 		function solution(s) {
 			let answer = "";
+			for (let x of s) {
+				console.log(x);
 
+				// if-else 문이라도 각 실행줄이 1줄이면 중괄호 생략 가능
+				// 문자열("")에 문자열("#", x)을 추가할 때는 join, push 필요없이 '+' 연산자로 가능 
+				if (x == 'A') answer += "#";
+				else answer += x;
+			}
 
 			return answer;
 		}
@@ -34,8 +41,10 @@
 	<script>
 		function solution(s) {
 			let answer = s;
+			//answer = answer.replaceAll("A", "#");
 
-
+			//정규식 사용
+			answer = answer.replace(/A/g, "#");
 			return answer;
 		}
 
