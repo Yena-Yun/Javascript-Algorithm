@@ -10,6 +10,23 @@
 		function solution(s) {
 			let answer = 0;
 
+			for (let x of s) {
+				//x.toUpperCase(): x를 대문자로 바꾼 것
+				//console.log(x.toUpperCase(), x);
+				//x와 x를 대문자로 바꾼 것이 일치하면 answer++
+				//if (x === x.toUpperCase()) answer++;
+
+				//유니코드: 모든 시스템에서 일관되게 문자를 표현하기 위한 산업표준
+				//charCodeAt: 주어진 index에 해당하는 유니코드 값을 리턴 
+				//대소문자 구분 (소문자 a의 유니코드와 대문자 A의 유니코드는 다름)
+				//대문자 유니코드: 65~90(A-Z, 둘을 빼면 25, 25+1= 26(알파벳 개수))
+				//소문자 유니코드: 97~122(a-z)
+				//charAt: index에 해당하는 문자를 리턴, chartCodeAt: 유니코드 값을 리턴
+				console.log(num);
+				let num = x.charCodeAt();
+				//num이 대문자 유니코드 범위에 있으면(= 대문자이면) answer++
+				if (num >= 65 && num <= 90) answer++;
+			}
 
 			return answer;
 		}
