@@ -10,10 +10,20 @@
 		function solution(s) {
 			let answer = "";
 
+			for (let x of s) {
+				//문자열 누적은 '+' 연산자
+				//소문자라면 대문자로 바꿔서 누적, 대문자라면 그냥 누적
+				//if (x === x.toLowerCase()) answer += x.toUpperCase();
+				//else answer += x;
 
+				let num = x.charCodeAt();
+				//97(소문자a) - 65(대문자A) = 32
+				//String.fromCharCode: charCode(숫자)를 문자로 바꿈
+				if (num >= 97 && num <= 122) answer += String.fromCharCode(num - 32); //num - 32: 대문자화
+				else answer += x;
+			}
 
 			return answer;
-
 		}
 
 		let str = "ItisTimeToStudy";
