@@ -9,7 +9,28 @@
 	<script>
 		function solution(s) {
 			let answer = "";
+			//min은 가장 큰 수(Number.MAX_SAFE_INTEGER)로 초기화하고, 
+			//max는 가장 작은 수로 초기화한다. 
+			let max = Number.MIN_SAFE_INTEGER;
 
+			for (let x of s) {
+				if (x.length > max) {
+					max = x.length;
+					//길이가 최대(max)인 단어(x)를 answer에 넣어준다.
+					answer = x;
+				}
+			}
+
+			//내가 푼 부분
+			//let maxLength = 0;
+			//
+			//for (let i = 0; i < s.length; i++) {
+			//	let strLength = s[i].length;
+			//	console.log(strLength);
+			//
+			//	if (strLength > maxLength) maxLength = strLength;
+			//}
+			//answer = maxLength;
 
 			return answer;
 		}
