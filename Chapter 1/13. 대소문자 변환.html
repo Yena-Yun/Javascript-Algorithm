@@ -10,6 +10,20 @@
 		function solution(s) {
 			let answer = "";
 
+			for (let x of s) {
+				if (x === x.toUpperCase()) answer += x.toLowerCase();
+				else answer += x.toUpperCase();
+			}
+
+			//for (let x of s) {
+			//	let num = x.charCodeAt();
+			//	if (num >= 97 && num <= 122) {
+			//		answer += x.toUpperCase();
+			//	} else if (num >= 65 && num <= 90) {
+			//		answer += x.toLowerCase();
+			//	}
+			//}
+
 			return answer;
 		}
 
