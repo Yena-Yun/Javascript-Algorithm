@@ -9,7 +9,41 @@
 	<script>
 		function solution(s) {
 			let answer;
+			// 몫만 구하기: parseInt() 또는 Math.floor
+			let mid = Math.floor(s.length / 2);
 
+			// substring(start, end): start 인덱스부터 end 인덱스 '전'까지
+			//if (s.length % 2 === 1) answer = s.substring(mid, mid + 1);
+			//else answer = s.substring(mid - 1, mid + 1);
+
+			// substr(start, 갯수): start부터 특정갯수만큼 뽑기
+			if (s.length % 2 === 1) answer = s.substr(mid, 1);
+			else answer = s.substr(mid - 1, 2);
+
+
+
+			//1글자 -> 글자 전체
+			//2글자 -> 글자 전체
+			//3글자 -> 인덱스 1번째
+			//4글자 -> 인덱스 1,2번째
+			//5글자 -> 인덱스 2번째
+			//6글자 -> 인덱스 2,3번째
+			//7글자 -> 인덱스 3번째
+
+			//let index = 0;
+			//let len = s.length;
+			//console.log(len);
+
+			//if (len % 2 === 1) {
+			//	index = parseInt(len / 2);
+			//	console.log(index);
+			//	answer = s[index];
+			//	console.log(answer);
+			//} else {
+			//	index = s.length / 2;
+			//	answer = s[index] + s[index - 1];
+			//	console.log(answer);
+			//}
 
 			return answer;
 		}
