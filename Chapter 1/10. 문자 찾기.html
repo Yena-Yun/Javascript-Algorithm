@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 <head>
 	<meta charset="UTF-8">
@@ -22,10 +22,10 @@
 	</script>
 </body>
 
-</html>
+</html> -->
 
 
-<html>
+<!-- <html>
 
 <head>
 	<meta charset="UTF-8">
@@ -43,8 +43,38 @@
 			return answer;
 		}
 
-		let str = "COMPUTERPROGRAMMING";
-		console.log(solution(str, 'R'));
+		let string = "COMPUTERPROGRAMMING";
+		console.log(solution(string, 'R'));
+	</script>
+</body>
+
+</html> -->
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer = 0; //count
+			let pos = s.indexOf('R'); //'R'이 처음 등장하는 위치
+			console.log(pos);
+
+			//pos가 있을 때만
+			while (pos !== -1) {
+				answer++; //count 1 올려주고
+				pos = s.indexOf('R', pos + 1); //'R'을 pos 다음 위치부터 찾기 시작
+			}
+
+			return answer;
+		}
+
+		console.log(solution("COMPUTERPROGRAMMING"));
 	</script>
 </body>
 

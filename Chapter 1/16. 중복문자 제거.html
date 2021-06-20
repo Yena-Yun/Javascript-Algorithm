@@ -9,7 +9,29 @@
 	<script>
 		function solution(s) {
 			let answer = "";
+			// indexOf(찾을 문자): 해당 문자가 등장하는 '첫번째' 인덱스 반환
+			//console.log(s.indexOf('k')); //0
+			// indexOf(찾을 문자, 찾기 시작할 위치)
+			//console.log(s.indexOf('k', 1)); //'k'를 1번째 인덱스부터 찾기 시작
+			// 대소문자 구분, 발견 못하면 -1 리턴
+			//console.log(s.indexOf('K')); //-1
 
+			for (let i = 0; i < s.length; i++) {
+				// 콘솔에 => 특정문자, 돌고있는 i, 특정문자가 맨 처음 발견되는 i
+				//console.log(s[i], i, s.indexOf(s[i]));
+				// k  0  0
+				// s  1  1
+				// e  2  2
+				// k  3  0
+				// k  4  0
+				// s  5  1
+				// e  6  2
+				// t  7  7
+
+				// 특정문자가 맨 처음 발견되는 위치가 돌고 있는 i와 동일할 때만 answer에 누적
+				// (=> 중복문자 제거)
+				if (s.indexOf(s[i]) === i) answer += s[i];
+			}
 
 			return answer;
 		}
