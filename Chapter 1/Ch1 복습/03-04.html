@@ -1,0 +1,53 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(n) {
+			let answer;
+
+			//학생 명수에서 1다스를 뜻하는 12를 나눠주고 올림 처리하면 
+			//총 필요한 다스 수가 나옴
+			answer = Math.ceil(n / 12);
+
+			return answer;
+		}
+
+		console.log(solution(178));
+	</script>
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(n) {
+			let answer = 0;
+
+			//for문을 돌면서 i를 하나씩 더해준다.
+			// i < n+1 보다 i <= n (더 간결)
+			for (let i = 0; i <= n; i++) {
+				answer += i;
+			}
+
+			return answer;
+		}
+
+		console.log(solution(10));
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(a, b, c) {
+			let answer; //최소값
+
+			//a와 b를 먼저 비교해서 answer 결정
+			if (a < b) answer = a;
+			else answer = b;
+
+			//정해진 answer를 c와 한번 더 비교해서 최종적으로 answer 결정
+			if (c < answer) answer = c;
+
+			return answer;
+		}
+
+		console.log(solution(2, 5, 1));
+	</script>
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(a, b, c) {
+			let answer = "YES";
+			let max;
+
+			//나머지 두 수를 더한 값이 최대값보다 작거나 같으면
+			//삼각형이 될 수 없음
+			let sum = a + b + c;
+
+			//최대값 구하기
+			if (a > b) max = a;
+			else max = b;
+
+			if (c > max) max = c;
+
+			//세 수의 합에서 최대값을 뺀다
+			if (sum - max <= max) answer = "NO";
+
+			return answer;
+		}
+
+		console.log(solution(13, 33, 17));
+	</script>
+</body>
+
+</html>
