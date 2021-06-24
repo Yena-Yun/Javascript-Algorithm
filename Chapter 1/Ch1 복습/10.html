@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s, t) {
+			let answer = 0;
+
+			for (let x of s) {
+				if (x === t) answer++;
+			}
+
+			return answer;
+		}
+
+		let str = "COMPUTERPROGRAMMING";
+		console.log(solution(str, 'R'));
+	</script>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s, t) {
+			let answer = 0;
+			//indexOf(찾는 글자): 찾는 위치가 없으면 맨 처음 등장하는 인덱스 반환
+			//let pos = s.indexOf(t);
+			console.log(pos); // 7
+
+			while (pos !== -1) {
+				answer++;
+				//indexOf(찾는 글자, 찾기 시작하는 위치)
+				pos = s.indexOf(t, pos + 1);
+			}
+
+			return answer;
+		}
+
+		let string = "COMPUTERPROGRAMMING";
+		console.log(solution(string, 'R'));
+	</script>
+</body>
+
+</html>
