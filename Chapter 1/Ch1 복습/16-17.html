@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer = "";
+
+			for (let i = 0; i < s.length; i++) {
+				// s[i]: 특정 '문자'
+				// 특정문자가 처음 발견되는 인덱스가 
+				// 현재 돌고 있는 i와 동일할 때만 answer에 누적 (=> 중복문자 제거)
+				if (s.indexOf(s[i]) === i) answer += s[i];
+			}
+
+			return answer;
+		}
+		console.log(solution("ksekkset"));
+	</script>
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer;
+
+			//filter(function (v, i) { return ~ })
+			//for문 안 쓰고 i 쓸 수 있는 방법, filter로 꺼낸 하나하나의 값은 v
+			answer = s.filter(function (v, i) {
+				return s.indexOf(v) === i;
+			});
+
+			// good 0 0
+			// time 1 1
+			// good 0 2
+			// time 1 3
+			// student 4 4 
+
+			return answer;
+		}
+		let str = ["good", "time", "good", "time", "student"];
+		console.log(solution(str));
+	</script>
+</body>
+
+</html>
