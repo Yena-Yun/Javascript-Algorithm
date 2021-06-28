@@ -10,6 +10,21 @@
 		function solution(a, b) {
 			let answer = "";
 
+			for (let i = 0; i < a.length; i++) {
+				if (a[i] === b[i]) answer += "D ";
+				else if (a[i] === 1 && b[i] === 3) answer += "A ";
+				else if (a[i] === 2 && b[i] === 1) answer += "A ";
+				else if (a[i] === 3 && b[i] === 2) answer += "A ";
+				else answer += "B ";
+			}
+
+			//1,2,3의 대소를 비교하는 문제가 아님
+			//(문제에 나와있는 대로 각각 1=가위, 2=바위, 3=보를 의미)
+			//for (let i = 0; i < a.length; i++) {
+			//	if (a[i] > b[i]) answer += "A ";
+			//	else if (a[i] === b[i]) answer += "D ";
+			//	else answer += "B ";
+			//}
 
 			return answer;
 		}
