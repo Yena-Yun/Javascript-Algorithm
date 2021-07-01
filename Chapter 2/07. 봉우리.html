@@ -10,11 +10,36 @@
 		function solution(arr) {
 			let answer = 0;
 			let n = arr.length;
-			let dx = [];
-			let dy = [];
+			//dx, dy: 특정 위치에서 위, 아래, 좌, 우를 보기 위한 x, y 좌표
+			//(dx, dy) => (-1, 0), (0, 1), (1, 0), (0, -1)
+			//각 위치의 인덱스(i, j)에 dx의 k번째와  dy의 k번째를 각각 '더해'준다 
+			//(k는 dx, dy 배열을 각각 도는 인덱스) => i + dx[k], j + dy[k]
+			//예: (1, 2) => dx(-1)와 dy(0)를 각각 더해주면 (0, 2) 지점으로 이동(위로 이동)
+			let dx = [-1, 0, 1, 0];
+			let dy = [0, 1, 0, -1];
 
+			for (let i = 0; i < n; i++) {
+				for (let j = 0; j < n; j++) {
+					//flag 선언 (1로 초기화)
+					let flag = 1;
 
-
+					for (let k = 0; k < 4; k++) {
+						//가려고 하는 행 좌표와 열 좌표
+						let nx = i + dx[k];
+						let ny = j + dy[k];
+						//범위가 초과하지 않도록 제약을 걸어두고
+						//그 안에 해당하는 좌표들만 검사
+						if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] >= arr[i][j]) {
+							//조건문이 true라면 arr[i][j]는 봉우리가 아니라는 뜻 => flag를 0으로(= false)으로 바꾸고 
+							//위,아래,좌,우 중에 아닌 경우가 하나라도 발견되면 더 검사할 필요 없으므로 break
+							flag = 0;
+							break;
+						}
+					}
+					//flag가 위의 if문에 걸려 false가 되지 않고 그대로 true로 반환되면 해당 좌표가 봉우리라는 뜻이므로 answer +1
+					if (flag) answer++;
+				}
+			}
 
 			return answer;
 		}
