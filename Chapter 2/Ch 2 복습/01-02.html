@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(arr) {
+			let answer = [];
+			//첫 번째 수는 무조건 출력
+			answer.push(arr[0]);
+
+			for (let i = 1; i < arr.length; i++) {
+				if (arr[i] > arr[i - 1]) answer.push(arr[i]);
+			}
+
+			return answer;
+		}
+
+		let arr = [7, 3, 9, 5, 6, 12];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(array) {
+			//맨 앞의 학생은 무조건 보이므로 answer를 1명으로 초기화해놓음
+			let answer = 1;
+			//앞에 있는 수들보다 뒤에 있는 수가 크면 카운트됨
+			//max 값이 차례로 바뀜
+			let max = array[0]; //현재 돌고 있는 i의 이전값 중 최대값
+
+			for (let i = 1; i < array.length; i++) {
+				if (array[i] > max) {
+					max = array[i];
+					answer++;
+				}
+			}
+
+			return answer;
+		}
+
+		let array = [130, 135, 148, 140, 145, 150, 150, 153];
+		console.log(solution(array));
+	</script>
+</body>
+
+</html>
