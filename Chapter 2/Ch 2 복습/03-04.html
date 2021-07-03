@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(a, b) {
+			let answer = "";
+
+			for (let i = 0; i < a.length; i++) {
+				//예외인 경우를 맨 처음에 처리
+				if (a[i] === b[i]) answer += "D "
+				//A가 나오는 모든 경우의 수를 따져주고 (몇개 안됨)
+				else if (a[i] === 1 && b[i] === 3) answer += "A "
+				else if (a[i] === 2 && b[i] === 1) answer += "A "
+				else if (a[i] === 3 && b[i] === 2) answer += "A "
+				//나머지는 모두 B라는 식으로 처리
+				else answer += "B "
+			}
+
+			return answer;
+		}
+
+		let a = [2, 3, 3, 1, 3];
+		let b = [1, 1, 2, 2, 3];
+		console.log(solution(a, b));
+	</script>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(arr) {
+			let answer = 0;
+			let count = 0; //일종의 flag
+
+			for (let x of arr) {
+				if (x === 1) {
+					count++;
+					answer += count;
+				} else count = 0;
+			}
+
+			return answer;
+		}
+
+		let arr = [1, 0, 1, 1, 1, 0, 0, 1, 1, 0];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
