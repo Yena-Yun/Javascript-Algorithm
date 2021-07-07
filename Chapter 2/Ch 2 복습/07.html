@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(arr) {
+			let answer = 0;
+			let n = arr.length;
+			let dx = [-1, 0, 1, 0];
+			let dy = [0, 1, 0, -1];
+
+			for (let i = 0; i < n; i++) {
+				for (let j = 0; j < n; j++) {
+					let flag = 1;
+
+					for (let k = 0; k < 4; k++) {
+						//가려고 하는 행 좌표와 열 좌표
+						let nx = i + dx[k];
+						let ny = j + dy[k];
+
+						//범위가 초과하지 않도록 제약을 걸어두고
+						//그 안에 해당하는 좌표들만 검사
+						if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] >= arr[i][j]) {
+
+							//조건문이 true라면 arr[i][j]는 봉우리가 아니라는 뜻 => flag를 0으로(= false)으로 바꾸고 
+							//위,아래,좌,우 중에 아닌 경우가 하나라도 발견되면 더 검사할 필요 없으므로 break
+							flag = 0;
+							break;
+						}
+					}
+
+					//flag가 위의 if문에 걸려 false가 되지 않고 그대로 true로 반환되면 해당 좌표가 봉우리라는 뜻이므로 answer +1
+					if (flag) answer++;
+				}
+			}
+
+			return answer;
+		}
+
+		let arr = [
+			[5, 3, 7, 2, 3],
+			[3, 7, 1, 6, 1],
+			[7, 2, 5, 3, 4],
+			[4, 3, 6, 4, 1],
+			[8, 7, 3, 5, 2]
+		];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
