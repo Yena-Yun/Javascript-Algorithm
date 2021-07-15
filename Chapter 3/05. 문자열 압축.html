@@ -9,16 +9,26 @@
 	<script>
 		function solution(s) {
 			let answer = "";
+			//맨 처음 등장하는 알파벳은 무조건 카운트하므로 1로 초기화
 			let cnt = 1;
+			//s[10] === s[11] 자체가 아예 성립이 되지 않는 문법적 오류를 방지하기 위한 대처방안
 			s = s + " ";
-			for (let i = 0; i < s.length - 1; i++) {
-				if (s[i] === s[i + 1]) cnt++;
-				else {
+
+			for (let i = 0; i < s.length; i++) {
+				if (s[i] === s[i + 1]) {
+					cnt++;
+				} else {
+					//그 다음에 오는 알파벳이 다르면 answer에 더해줌
+					//(첫번째 부분이 아니라 마지막 부분을 넣어줘야 한 번만 카운트가 됨)
 					answer += s[i];
+					//1개일 때는 갯수를 더해주지 않음
+					//	=> 갯수가 1보다 클 때만 answer에 cnt를 추가 (문자열로!)
 					if (cnt > 1) answer += String(cnt);
+					// 이후 cnt는 1로 초기화
 					cnt = 1;
 				}
 			}
+
 			return answer;
 		}
 
