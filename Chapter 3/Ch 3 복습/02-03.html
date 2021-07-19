@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer = "YES";
+			let len = s.length;
+
+			//"알파벳만 가지고 회문 검사"
+			//	=> 알파벳이 아닌 문자들을 모두 '공백'으로 바꿔준다.
+			//s를 모두 소문자로 바꾼 뒤(toLowerCase()), 
+			//정규식으로 소문자 알파벳이 아닌('^') 모든 문자(/g)를 공백으로 '대체'(replace())
+			s = s.toLowerCase().replace(/[^a-z]/g, "");
+
+			//전처리가 끝난 후 이전과 똑같이 회문 여부를 검사한다.
+			if (s.split('').reverse().join('') !== s) answer = "NO";
+
+			return answer;
+		}
+
+		let str = "GOOD";
+		//let str = "found7, time: study; Yduts; emit, 7Dnuof";
+		console.log(solution(str));
+	</script>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(str) {
+			let answer = "";
+
+			for (let x of str) {
+				if (!isNaN(x)) answer += x;
+			}
+
+			//parseInt를 안 하면 앞에 붙은 0이 그대로 출력됨 ('0208')
+			//'자연수(숫자)'를 출력해야 하므로 숫자로 바꿔준다.
+			return parseInt(answer);
+		}
+
+		let str = "g0en2T0s8eSoft";
+		console.log(solution(str));
+	</script>
+</body>
+
+</html>
