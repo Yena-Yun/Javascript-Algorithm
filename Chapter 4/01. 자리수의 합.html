@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 <head>
 	<meta charset="UTF-8">
@@ -8,9 +8,36 @@
 <body>
 	<script>
 		function solution(n, arr) {
-			let answer, max = Number.MIN_SAFE_INTEGER;
+			//출력할 숫자
+			let answer = Number.MIN_SAFE_INTEGER;
+			//자릿수의 합의 최대값
+			let max = Number.MIN_SAFE_INTEGER;
 
-
+			for (let x of arr) {
+				//각 자릿수의 합을 담는 sum 선언
+				let sum = 0;
+				//x는 변형하지 않고 그대로 둬야 (=> 임시변수 선언)
+				let temp = x;
+				//temp가 존재하는 동안
+				while (temp) {
+					//각 자릿수 = temp % 10 (128 => 8, 12 => 2, 1 => 1)
+					//sum에 자릿수(temp % 10)를 더해주고
+					sum += temp % 10;
+					//temp에는 나누고 남은 몫을 매번 넣어준다.
+					//(JS에는 파이썬처럼 '//' 문법이 없어서 '/'로 나눠주고 parseInt 또는 Math.floor)
+					temp = Math.floor(temp / 10);
+				}
+				if (sum > max) {
+					max = sum;
+					answer = x;
+					//자릿수의 합이 현재까지 구한 최대값과 같을 때
+				} else if (sum === max) {
+					//x가 출력할 answer보다 크면 answer에 x 넣기
+					if (x > answer) answer = x;
+				}
+				//console.log(sum);
+				console.log(max);
+			}
 
 
 			return answer;
@@ -21,8 +48,7 @@
 	</script>
 </body>
 
-</html>
-
+</html> -->
 
 
 <html>
@@ -37,9 +63,18 @@
 		function solution(n, arr) {
 			let answer, max = Number.MIN_SAFE_INTEGER;
 
-
-
-
+			for (let x of arr) {
+				//toString해서 split 하면 각 자릿수가 배열에 문자열("") 형태로 담김
+				//예: ["1", "2", "8"]
+				//reduce로 각 자릿수를 더해주되 초기값 a(0)에 더해지는 b값은 숫자로 바꿔주기				
+				let sum = x.toString().split('').reduce((a, b) => a + Number(b), 0);
+				if (sum > max) {
+					max = sum;
+					answer = x;
+				} else if (sum === max) {
+					if (x > max) answer = x;
+				}
+			}
 
 			return answer;
 		}
