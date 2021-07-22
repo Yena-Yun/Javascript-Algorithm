@@ -7,13 +7,46 @@
 
 <body>
 	<script>
-		function solution(m, product) {
-			let answer = 0;
-			let n = product.length;
+		function solution(m, product) { // m: 예산
+			let answer = 0; //살 수 있는 최대 개수
+			let n = product.length; // product 배열의 길이 (= 반 학생 수)
 
+			//여러 개의 선택지 중 '일부'를 골라 어떤 조건의 총합을 넘기는지를 알아보는 문제는 먼저 '정렬'을 해야 함
 
+			//할인 받을 상품을 결정하고 나면 나머지는 예산에 맞춰 비용이 작은 것부터 최대한 사야 함
+			//	=> 총 비용 순으로 '오름차순 정렬' (=> sort(콜백함수))
+			//a와 b를 오름차순으로 정렬: sort((a, b) => a - b)
+			//a와 b를 내림차순으로 정렬: sort((a, b) => b - a)
+			//sort의 결과값: -1이면 오름차순, 1이면 내림차순, 0이면 순서 변경 x
+			product.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1]));
+			//console.log(product); //product 배열 안의 요소가 총합이 가장 작은 것부터 차례대로 나열됨
 
+			for (let i = 0; i < n; i++) {
+				//i번째 상품을 구매 및 배송한 뒤 남은 금액
+				let money = m - (product[i][0] / 2 + product[i][1]);
 
+				//구매한 상품 개수 카운트
+				//'최소한 1개 이상의 상품을 살 수 있는 예산이 있다'고 문제에서 명시 => cnt의 최소값은 1
+				let cnt = 1;
+
+				//남은 금액을 이용해 정렬된 순서대로 하나씩 구매
+				for (let j = 0; j < n; j++) {
+					//예산을 다 써서 더 이상 구매가 불가능한 경우 for문 멈추기
+					if (j !== i && (product[j][0] + product[j][1]) > money) break;
+
+					//j번째 상품은 i번째 상품은 절대 될 수 없음 (i번째를 구매하고 난 뒤 도는 for문이므로)
+					//	+ j번째 상품의 가격과 배송비를 합한 비용이 i번째 물건을 사고 남은 금액인 money보다 작거나 같아야 j번째 상품 구매 가능
+					if (j !== i && (product[j][0] + product[j][1]) <= money) {
+						//money에 j번째 상품을 사고 남은 금액을 다시 넣어줌
+						money -= product[j][0] + product[j][1];
+						//상품을 하나 더 샀음을 cnt(횟수)로 표시
+						cnt++;
+					}
+				}
+
+				answer = Math.max(answer,
+				cnt); //answer와 cnt 중 더 큰 것을 answer에 넣어준다 (구하는 것이 '살 수 있는 최대 개수'여서 별 의미 없는 Math.max라도 해 주는 게 맞음)
+			}
 
 			return answer;
 		}
