@@ -9,17 +9,39 @@
 	<script>
 		function solution(m, arr) {
 			let answer = 0,
-				lt = 0,
+				lt = 0, // left
 				sum = 0;
 
-			for (let i = 0; i < arr.length; i++) {
-				sum += arr[i];
-				for (let j = i + 1; j < arr.length; j++) {
-					sum += arr[j];
-
-				}
+			// two-pointers 알고리즘 쓰면 for문 하나만 필요 (시간복잡도 O(n))
+			// sum이 m보다 작으면 rt값을 sum에 더하고 rt 인덱스 ++
+			// sum이 m과 같으면 answer++, sum에서 lt값 빼고 lt 인덱스 ++,
+			// sum이 m보다 크면 lt값을 sum에서 빼 주고 lt 인덱스 ++
+			for (let rt = 0; rt < arr.length; rt++) {
+				// sum에 우선 rt번째 값을 더함
+				sum += arr[rt];
+				// 매번 더할 때마다 sum이 m인지 확인
 				if (sum === m) answer++;
+
+				// 예: sum이 4인 상태에서 갑자기 5가 더해져 9가 되버리는 경우
+				// 	=> 앞의 값들을 계속 빼줘야 6이 되기 때문에 단순 if문이 아닌 while문 필요
+				while (sum >= m) { // sum이 m보다 크거나 같으면 lt번째 값을 빼줘야 함 (같을 경우는 위에서 이미 answer 처리를 했으므로 다음 단계로 진행하기 위해, 클 경우는 m에 맞추려고)
+					// sum에서 arr의 lt번째 값을 빼고 lt에 ++ (두 과정을 한 번에 -> 후치연산)
+					sum -= arr[lt++];
+					// 값을 하나 빼고 나서 sum이 m인지 확인
+					if (sum === m) answer++;
+				}
 			}
+
+			// for문 2개 => 시간복잡도 O의 n제곱
+			//for (let i = 0; i < arr.length; i++) {
+			//	sum += arr[i];
+			//	console.log(sum);
+			//	for (let j = i + 1; j < arr.length; j++) {
+			//		sum += arr[j];
+			//		console.log(sum);
+			//	}
+			//	if (sum === m) answer++;
+			//}
 
 			return answer;
 		}
