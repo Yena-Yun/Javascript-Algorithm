@@ -8,40 +8,40 @@
 <body>
 	<script>
 		function solution(m, arr) {
+			// 이 문제에서의 answer는 count 개념
 			let answer = 0,
 				lt = 0, // left
 				sum = 0;
 
-			// two-pointers 알고리즘 쓰면 for문 하나만 필요 (시간복잡도 O(n))
-			// sum이 m보다 작으면 rt값을 sum에 더하고 rt 인덱스 ++
+			// two-pointers 알고리즘 => 반복문 하나만 필요 (시간복잡도 O(n))
+
+			// lt(left)값은 연속부분수열의 시작인덱스 -> 6이 되어 반환할 때와 값이 sum보다 커졌을 때 맨 앞자리 lt를 빼주고 이동시켜야 함
+			// rt(right)는 끝인덱스 -> 합이 6이 될 때까지 계속 이동
+			// sum은 합이 6인지 알아보기 위한 변수
+
+			// sum이 6보다 작으면 rt값을 sum에 더하고 rt 인덱스 ++
 			// sum이 m과 같으면 answer++, sum에서 lt값 빼고 lt 인덱스 ++,
 			// sum이 m보다 크면 lt값을 sum에서 빼 주고 lt 인덱스 ++
+
+			// rt로 for문을 돌면서
 			for (let rt = 0; rt < arr.length; rt++) {
-				// sum에 우선 rt번째 값을 더함
+				// 우선 sum에 rt번째 값을 더함
 				sum += arr[rt];
-				// 매번 더할 때마다 sum이 m인지 확인
+				// 매번 sum이 6이 되는지 확인
 				if (sum === m) answer++;
+				// (아직 sum이 6보다 작은 경우)
 
 				// 예: sum이 4인 상태에서 갑자기 5가 더해져 9가 되버리는 경우
-				// 	=> 앞의 값들을 계속 빼줘야 6이 되기 때문에 단순 if문이 아닌 while문 필요
-				while (sum >= m) { // sum이 m보다 크거나 같으면 lt번째 값을 빼줘야 함 (같을 경우는 위에서 이미 answer 처리를 했으므로 다음 단계로 진행하기 위해, 클 경우는 m에 맞추려고)
-					// sum에서 arr의 lt번째 값을 빼고 lt에 ++ (두 과정을 한 번에 -> 후치연산)
+				// 	=> {...3, 1, 1} 이런 상태일 수 있으므로 되돌아가서 6이 되려면 앞의 값들을 계속 빼줘야 하기 때문에 반복문인 while문 필요
+
+				// sum이 m보다 크거나 같으면 lt번째 값을 빼줘야 함 (같을 경우는 answer 처리 후 다음 단계로 진행하기 위해, 더 클 경우에는 다시 6에 맞추려고)
+				while (sum >= m) {
+					// sum에서 arr의 lt번째 값을 빼고 나서 lt에 바로 ++ (후치연산)
 					sum -= arr[lt++];
-					// 값을 하나 빼고 나서 sum이 m인지 확인
+					// 값을 한 번 뺄 때마다 sum이 6이 되는지 확인
 					if (sum === m) answer++;
 				}
 			}
-
-			// for문 2개 => 시간복잡도 O의 n제곱
-			//for (let i = 0; i < arr.length; i++) {
-			//	sum += arr[i];
-			//	console.log(sum);
-			//	for (let j = i + 1; j < arr.length; j++) {
-			//		sum += arr[j];
-			//		console.log(sum);
-			//	}
-			//	if (sum === m) answer++;
-			//}
 
 			return answer;
 		}
