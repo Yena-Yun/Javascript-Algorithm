@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 아나그램: 알파벳의 나열 순서는 다르지만 그 구성이 일치하는 두 단어
+		// 					(어느 한 단어를 재배열하면 상대편 단어가 될 수 있는 것)
+		// 문제: 길이가 같은 두 개의 단어를 주고 두 단어가 아나그램인지 판별
+		function solution(str1, str2) {
+			let answer = "YES";
+			let sH = new Map();
+
+			// str1에서 for-of로 값을 하나씩 꺼내 sH(str1의 해쉬맵 객체) 셋팅
+
+
+
+			// str2에서 x값을 찾아서 (for-of로 값을 하나씩 꺼냄)
+			// sH(str1)와 같은 key가 있으면 해당 key 값에서 1을 뺀다 (상쇄시킴)
+			// (이렇게 반복하다 str1의 값이 0이 되면 그때까지 str2와 갯수가 똑같다는 뜻임) 
+			// (이후 str2의 x가 str1에서 또 발견되지 않아서 for문을 돌지 않으면 그대로 YES 반환)
+
+
+			// * NO를 반환하는 경우
+			// 1) 처음부터 겹치는 key가 없거나
+			// 2) 상쇄 처리 후 또 for문을 도는데 x값이 0인 경우
+			//		(이미 모두 상쇄처리되어 0이 된 str1값을 str2에서 또 발견한 것임)
+			//		(str2에는 아직 있지만 str1에는 없는 글자란 뜻이므로 아나그램 x)
+
+
+
+			// if문에 안 걸린 for문 자체의 실행 내용
+			// (x값이 sH에 존재한다면) sH의 x값에서 1을 뺌 ('상쇄'시킴)
+			// (빼고 나서 str1 값이 0이 되는 것은 상관없고,
+			//	다음 for문에서 str2의 x에서 또 발견되지 않으면 갯수가 같다는 의미이므로 그대로 YES 반환하게 됨)
+
+
+
+			return answer;
+		}
+
+		let a = "abaCC";
+		let b = "bCaaab";
+		console.log(solution(a, b));
+	</script>
+</body>
+
+</html>

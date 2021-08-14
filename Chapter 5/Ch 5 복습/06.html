@@ -1,0 +1,48 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer;
+
+			// 해쉬함수 - Map() 사용하는 문제
+			// Map(): key-value pair로 구성된 객체의 집합
+			// Map 객체 sH 생성
+			let sH = new Map();
+
+			// 배열에서 하나씩 꺼내서 
+			// (else문 거쳐서) key가 이미 존재하면 기존 value 값에 +1
+			// (처음에) key가 없으면 무조건 value 1
+			for (let x of s) {
+				if (sH.has(x)) sH.set(sH.get(x) + 1);
+				else sH.set(x, 1);
+			}
+
+			// JS 최소값으로 초기화한 max 변수 선언
+			let max = Number.MIN_SAFE_INTEGER;
+
+			// sH을 '[key, val]' 형태로 꺼내서
+			for (let [key, val] of sH) {
+				// 해당 순번의 val이 max보다 크면
+				if (val > max) {
+					// max를 val로 업데이트
+					max = val;
+					// answer는 해당 val의 key로 업데이트
+					answer = key;
+				}
+			}
+
+			return answer; // C
+		}
+
+		let str = "BACBACCACCBDEDE";
+		console.log(solution(str));
+	</script>
+</body>
+
+</html>

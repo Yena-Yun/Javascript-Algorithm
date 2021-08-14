@@ -1,0 +1,82 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function compareMaps(map1, map2) {
+			// map1과 map2의 크기가 다르다면 false 리턴
+			if (map1.size !== map2.size) return false;
+
+			// map1에서 [key, val] 형식으로 하나씩 꺼내서
+			// map2에 key가 없거나 
+			// map2에 key는 있는데 map1의 val과 다를 경우 
+			// false 리턴
+			for (let [key, val] of map1) {
+				if (!map2.has(key) || map2.get(key) !== val) return false;
+			}
+
+			// 위의 if문에 걸리지 않으면 모두 true 리턴
+			return true;
+		}
+
+		function solution(s, t) {
+			let answer = 0;
+			let tH = new Map();
+			let sH = new Map();
+
+			// tH 셋팅하기 
+			// (key = x, val = count한 갯수)
+			// t배열에서 하나씩 꺼내서
+			// tH에 x값이 존재하면(has) x 자리에 x번째 값 + 1
+			// tH에 x값이 없으면 처음이므로 x 자리에 1 
+			for (let x of t) {
+				if (tH.has(x)) tH.set(x, tH.get(x) + 1);
+				else tH.set(x, 1);
+			};
+
+			// sH 셋팅하기
+			// t 길이만큼 돌면서 
+			// sH에 s의 i번째 값이 존재하면(has) s[i] 자리에 s[i]번째 값 + 1
+			// sH에 s의 i번째 값이 없으면 처음이므로 s[i] 자리에 1 
+			let len = t.length - 1;
+			for (let i = 0; i < len; i++) {
+				if (sH.has(s[i])) sH.set(s[i], sH.get(s[i]) + 1);
+				else sH.set(s[i], 1);
+			};
+
+			// rt로 t 길이 다음부터 s의 길이까지 돌면서
+			// sH에 s의 rt번째 값이 존재하면 해당 key의 기존 값에 + 1
+			// sH에 s의 rt번째 값이 없으면 처음이므로 key 자리에 1
+			let lt = 0;
+			for (let rt = len; rt < s.length; rt++) {
+				if (sH.get(s[rt])) sH.set(s[rt], sH.get(s[rt]) + 1);
+				else sH.set(s[rt], 1);
+
+				// 만약 compareMaps 외부함수에 sH, tH를 넣은 반환값이 true이면 answer에 ++
+				if (compareMaps(sH, tH)) answer++;
+
+				// sH에는 lt번째 값에서 1을 빼줌
+				sH.set(s[lt], sH.get(s[lt]) - 1);
+
+				// 1을 뺐는데 결과가 0이 되면 그 key는 더 이상 없다는 뜻이므로
+				// 정확한 연산을 위해 해당 key 자리를 삭제
+				if (sH.get(s[lt]) === 0) sH.delete(s[lt]);
+
+				// lt를 한 칸 앞으로 당김
+				lt++;
+			}
+
+			return answer;
+		}
+
+		let a = "bacaAacba";
+		let b = "abc";
+		console.log(solution(a, b));
+	</script>
+</body>
+
+</html>
