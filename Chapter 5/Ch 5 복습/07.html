@@ -14,7 +14,7 @@
 			let answer = "YES";
 			let sH = new Map();
 
-			// str1에서 for-of로 값을 하나씩 꺼내 sH(str1의 해쉬맵 객체) 셋팅
+			// str1에서 for-of로 값을 하나씩 꺼내서 sH(str1의 해쉬맵 객체) 셋팅
 			for (let x of str1) {
 				if (sH.has(x)) sH.set(x, sH.get(x) + 1);
 				else sH.set(x, 1);
