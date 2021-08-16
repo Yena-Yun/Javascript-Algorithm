@@ -11,16 +11,28 @@
 			let answer = "YES";
 			stack = [];
 
-			// "NO"를 반환하는 경우 제외하기
 			// 1) for-of, push(x), pop()
+			for (let x of s) {
+				// 꺼낸 게 "("이면 스택에 넣어줌
+				if (x === "(") stack.push(x);
 
+				// 꺼낸 게 ")"인 경우
+				else {
+					// 기존에 "("이 하나도 없으면
+					//")"와 만나 상쇄시킬 짝이 없으므로 NO 반환
+					if (stack.length === 0) return "NO";
 
+					// 기존에 "("가 있으면 짝을 만난 셈이니
+					// 스택 안의 "("를 꺼내서 둘을 상쇄
+					stack.pop();
+				}
+				// 결국 스택에 실제 들어가는 것은 "(" 뿐임 **
+			}
 
+			// 만약 for문을 다 돌았는데 스택에 여전히 뭔가 남아있으면
+			// 이번에는 "("가 남아 있는 것이므로 올바른 괄호 아님
 			// 2) if, length > 0
-
-
-
-			return answer;
+			if (stack.length > 0) return "NO";
 		}
 
 		let a = "(()(()))(()";
