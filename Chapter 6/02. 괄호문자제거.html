@@ -7,16 +7,33 @@
 
 <body>
 	<script>
+		// ( ) 괄호 사이의 문자를 모두 제거하는 문제
 		function solution(s) {
 			let answer;
 			let stack = [];
 
 			// for-of
+			for (let x of s) {
+				// 이 문제에서는 닫는 괄호가 기준
 
+				// 꺼낸 x가 '닫는 괄호'이면
+				if (x === ")") {
+					// '여는 괄호'가 나올 때까지 계속해서 제거
+					// 내가 한 코드 - 이렇게 하면 'x가 여는 괄호일 동안 돈다'는 의미
+					// while (x === "(") stack.pop(); // 
 
+					// 스택에서 꺼낸 것이 '여는 괄호가 아닐' 동안 계속 반복 
+					// 즉, 꺼낸 게 여는 괄호가 되는 순간 종료(= 여는 괄호까지 다 꺼내고서 종료)
+					while (stack.pop() !== "(");
+				}
 
-			// answer에 넣어주기
+				// (닫는 괄호는 스택에 넣은 적이 없으므로 신경쓸 필요 x)
+				// 닫는 괄호가 아니면 계속 스택에 넣어줌
+				else stack.push(x);
+			}
 
+			// answer에 스택내용 업데이트(join('')으로 배열괄호 및 컴마 제거)
+			answer = stack.join('');
 
 			return answer;
 		}
