@@ -12,15 +12,25 @@
 			let stack = [];
 
 			// for-of
+			for (let x of s) {
+				// x가 숫자일 경우 스택에 추가
+				// (s 문자열에서 꺼냈으므로 x도 문자열 -> x를 숫자로 변환해서 push)
+				if (!isNaN(x)) stack.push(Number(x));
 
+				// x가 숫자가 아닐 경우 (= 연산자일 경우)
+				else {
+					let rt = stack.pop();
+					let lt = stack.pop();
 
-			// if, '숫자이면' = !isNaN(x)
+					if (x === "+") stack.push(lt + rt);
+					else if (x === "-") stack.push(lt - rt);
+					else if (x === "*") stack.push(lt * rt);
+					else if (x === "/") stack.push(lt / rt);
+				}
+			}
 
-
-
-
-			// answer에 값 넣어주기
-
+			// 스택에 마지막에 push된 값(= 최종 연산값)을 answer에 넣어주기
+			answer = stack[0];
 
 			return answer;
 		}
