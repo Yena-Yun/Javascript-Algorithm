@@ -14,8 +14,7 @@
 			// for-of
 			for (let x of s) {
 				// x가 숫자 '형태'일 경우 스택에 추가
-				// (** isNaN은 생긴 게 숫자인지만 판별)
-				// (s 문자열에서 꺼냈으므로 x도 문자열 -> x를 숫자로 변환해서 push)
+				// (** isNaN은 생긴 게 숫자인지만 판별 -> 꺼낸 값은 Number 또는 parseInt로 진짜 숫자로 바꿔줘야 함)
 				if (!isNaN(x)) stack.push(Number(x));
 
 				// x가 숫자가 아닐 경우 (= 연산자일 경우)
