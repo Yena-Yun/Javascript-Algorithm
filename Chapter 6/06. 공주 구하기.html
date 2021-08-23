@@ -7,21 +7,38 @@
 
 <body>
 	<script>
+		// 1번부터 N번까지 차례로 앉아서 
+		// K(특정숫자)를 외치면 제외하고 다시 1부터 시작하여 외침
+		// 마지막에 남은 사람의 번호 구하기
+
+		// queue에서 꺼내는 건 shift() / stack에서 꺼내는 건 pop()
+		// (넣는 건 똑같이 push() - 맨 뒤에 추가)
+
 		function solution(n, k) {
 			let answer;
-			let queue; // queue = Array.from
+			// Array.from: 유사배열 객체 (배열을 만들어줌)
+			let queue = Array.from({
+				length: n // 길이가 n인 배열 (공간만 n개이고 안에 값은 undefined)
+				// v: 배열 안에 들어갈 값, i: 인덱스
+			}, (v, i) => i + 1); // v은 i+1로 하나씩 넣어줌 (= 배열 초기화)
+			// console.log(queue); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-			// while (queue의 길이까지 돌기)
+			// queue의 길이가 true(0이 아님)인 동안 반복 => false(0)이 되면 종료
+			while (queue.length) {
+				// i가 k가 되기 전까지는 for문을 돌면서
+				// queue의 맨 앞을 빼서(shift()) 맨 뒤에 추가(push())
+				for (let i = 1; i < k; i++) queue.push(queue.shift());
 
+				// 아닌 경우에는 (= k번째가 되면) 
+				// (=> 이미 while문으로 돌고 있으므로 k번째 차례가 온다는 것 유추 가능)
+				queue.shift(); // 추가없이 제거만
 
-			// for 1줄 (i로 돌기)
+				// queue에 1개가 남으면
+				// queue에서 그 하나 남은 걸 꺼내서 answer에 추가
+				if (queue.length === 1) answer = queue.shift();
+			}
 
-
-			// while 실행문 1줄
-
-
-			// if 1줄
-
+			// => 마지막 값이 꺼내지면서 queue의 길이가 0이 되므로 while문 종료
 
 			return answer;
 		}
