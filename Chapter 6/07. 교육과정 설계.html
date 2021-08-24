@@ -9,17 +9,23 @@
 	<script>
 		function solution(need, plan) {
 			let answer = "YES";
-			let queue; // split 사용
+			let queue = need.split(''); // ["C", "B", "A"]
+			// console.log(queue);
+			// console.log(queue.shift());
 
-			// "NO" 반환하는 경우 제외
-			// 1) for-of, if
+			for (let x of plan) {
+				// plan에서 꺼낸 게 필수과목(need)에 포함되어 있는지 먼저 확인 (=> D, G 이런거 제외)
+				if (queue.includes(x)) {
 
+					// plan에서 꺼낸 게 필수과목 큐의 맨 앞과 다르다면
+					// (순서대로 이수해야 하므로 필수과목에서의 순서가 중요 => 큐에 넣은 이유)
+					if (x !== queue.shift()) answer = "NO"; // NO 반환
+				}
+			}
+			// console.log(queue);
 
-
-
-
-			// 2) if
-
+			// 큐를 다 돌고도 안에 필수과목이 남아 있다면 NO 반환
+			if (queue.length > 0) answer = "NO";
 
 			return answer;
 		}
