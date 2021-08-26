@@ -1,0 +1,29 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(s) {
+			let answer = "YES";
+
+			// s 배열에서 하나씩 꺼낸 것이 '여는 괄호'이면 스택에 추가
+
+			// 꺼낸 게 '닫는 괄호'이면
+			// 기존 스택에 여는 괄호가 없을 경우 닫는 괄호가 남은 것 -> NO
+
+			// 기존 스택에 여는 괄호가 있으면 여는 괄호 하나를 꺼냄 (둘을 상쇄)
+
+			// for문을 다 돌았는데 스택에 여전히 '여는 괄호'가 남아 있으면 올바른 괄호 X -> NO
+
+		}
+
+		let a = "(()(()))(()";
+		console.log(solution(a));
+	</script>
+</body>
+
+</html>

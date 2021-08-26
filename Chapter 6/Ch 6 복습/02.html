@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 여는 괄호와 닫는 괄호 사이에 있는 문자 제거하기
+		function solution(s) {
+			let answer;
+
+			// 꺼낸 게 '닫는 괄호'이면
+			// '여는 괄호'가 나올 때까지 계속해서 앞부분을 제거 (특정 조건 하에 반복 - while)
+			// '스택에서 꺼낸 것이 여는 괄호가 아닐' 동안 꺼내기 
+
+			// 꺼낸 것이 닫는 괄호가 아니면 계속 스택에 추가
+
+			// 스택 안에 남은 문자들을 '대괄호 제거 + 다 붙여서' answer에 넣어줌
+
+			return answer;
+		}
+
+		let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+		console.log(solution(str));
+	</script>
+</body>
+
+</html>
