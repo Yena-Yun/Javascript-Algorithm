@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 1번부터 N번까지 돌면서 K(특정숫자)와 일치하면 제외, 
+		// 다시 1부터 시작 => 마지막에 남은 사람의 번호 구하기
+
+		// ** queue에서 꺼내는 건 shift() / stack에서 꺼내는 건 pop()
+		// 		넣는 건 똑같이 push() (맨 뒤에 추가)
+
+
+		function solution(n, k) {
+			let answer;
+			// Array.from: 유사배열 객체 (배열을 만들어줌)
+			// 길이가 n인 배열 (공간만 n개이고 안에 값은 undefined)
+			// v: 배열 안에 들어갈 값, i: 인덱스
+			// v은 i+1로 하나씩 넣어줌 (= 배열 초기화)
+
+
+			// queue의 길이가 true인(0이 아닌) 동안 반복 => false(0)이 되면 종료
+			// i가 k가 되기 전까지는 for문을 돌면서
+			// queue의 맨 앞을 빼서(shift()) 맨 뒤에 추가(push())
+
+			// 아닌 경우에는 (k번째가 되면) 추가없이 제거만
+			// (=> 이미 while문으로 돌고 있으므로 k번째 차례가 오게 됨)
+
+			// queue에 1개가 남으면
+			// 그 하나 남은 걸 꺼내서 answer에 추가
+
+			// => 마지막 값이 꺼내지면서 queue의 길이가 0이 되므로 while문 종료
+
+			return answer;
+		}
+
+		console.log(solution(8, 3));
+	</script>
+</body>
+
+</html>

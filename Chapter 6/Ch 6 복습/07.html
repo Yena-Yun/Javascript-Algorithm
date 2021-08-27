@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		function solution(need, plan) {
+			let answer = "YES";
+			let queue; // split
+
+			// plan에서 꺼낸 게 필수과목(need)에 포함(includes)되어 있는지 먼저 확인 (=> D, G 이런거 제외하기)
+
+			// plan에서 꺼낸 것이 필수과목 큐의 맨 앞을 꺼낸 것과 다르다면 NO 반환
+			// (순서대로 이수해야 하므로 필수과목에서의 순서가 중요 => 큐에 넣은 이유)
+
+
+
+			// 큐를 다 돌고도 안에 필수과목이 남아 있어도(길이가 0 이상) NO 반환
+
+			return answer;
+		}
+
+		let a = "CBA";
+		let b = "CBDAGE";
+		console.log(solution(a, b));
+	</script>
+</body>
+
+</html>

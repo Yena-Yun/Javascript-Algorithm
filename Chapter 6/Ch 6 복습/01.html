@@ -9,16 +9,25 @@
 	<script>
 		function solution(s) {
 			let answer = "YES";
+			let stack = [];
 
 			// s 배열에서 하나씩 꺼낸 것이 '여는 괄호'이면 스택에 추가
+			for (let x of s) {
+				if (x === "(") stack.push();
 
-			// 꺼낸 게 '닫는 괄호'이면
-			// 기존 스택에 여는 괄호가 없을 경우 닫는 괄호가 남은 것 -> NO
-
-			// 기존 스택에 여는 괄호가 있으면 여는 괄호 하나를 꺼냄 (둘을 상쇄)
+				// 꺼낸 게 '닫는 괄호'이면
+				else {
+					// 기존 스택에 여는 괄호가 없을 경우 닫는 괄호가 남은 것 -> NO
+					if (stack.length === 0) answer = "NO";
+					// 기존 스택에 여는 괄호가 있으면 둘이 만났으므로 여는 괄호 하나를 꺼냄
+					else stack.pop();
+				}
+			}
 
 			// for문을 다 돌았는데 스택에 여전히 '여는 괄호'가 남아 있으면 올바른 괄호 X -> NO
+			if (stack.length > 0) answer = "NO";
 
+			return answer;
 		}
 
 		let a = "(()(()))(()";

@@ -9,10 +9,10 @@
 	<script>
 		function solution(s) {
 			let answer = 0;
-			let stack = [];
 
-			// 스택에 담긴 값이 기준이 아니라 바로 앞에 무엇을 뽑았는지가 중요
-			// 	=> for-of가 아닌 i(인덱스)-for문 필요
+
+			// 스택에 담긴 값 자체가 기준이 아니라 바로 앞에 무엇을 뽑았는지가 중요
+			// 	=> for-of가 아닌 i(인덱스)-for문 
 			for (let i = 0; i < s.length; i++) {
 				// 꺼낸 값이 여는 괄호이면 
 				if (s[i] === "(") stack.push(s[i]); // 스택에 추가
