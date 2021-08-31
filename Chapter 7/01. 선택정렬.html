@@ -8,12 +8,28 @@
 <body>
 	<script>
 		function solution(arr) {
-			let answer = arr;
+			let answer = arr; // 얕은 복사 
+			// (spread로 하나하나 복사하는 게 깊은 복사, 단순히 변수만 새로 담는 게 얕은 복사)
+			// (얕은 복사는 arr이 바뀔 경우 answer도 바뀌어 있음/ 깊은 복사는 아예 다른 변수를 만든 것이므로 서로 영향을 끼치지 않음)
 
 			// 이중 for문
 			// let idx = i
+			for (let i = 0; i < arr.length - 1; i++) {
+				// idx는 일단 i로 초기화 (최소값을 따로 담는 변수)
+				let idx = i;
 
+				for (let j = i + 1; j < arr.length; j++) {
+					// i 다음부터 j를 돌면서 j가 idx보다 작은 경우가 발견되면
+					// 현재 j for문에서의 최소값이 됨 => idx를 최소값인 j로 바꿔줌
+					if (arr[j] < arr[idx]) idx = j;
+				}
+				// 다 돌고 나면 idx에는 현재 i번째에서 arr의 최소값이 담겨 있음
 
+				// 구한 최소값은 맨앞(현재의 i번째)에 고정시켜야 하므로 i번째와 idx번째를 바꿔줌 
+				// (i번째 위치에 최소값이 들어가고 idx는 다시 i로 초기화되는 결과)
+				// 두 값을 바꿀 때는 양쪽에 [ ] 이용 (파이썬과 같은 기능, JS 최신버전에 도입 - 이제 tmp 쓸 필요 x)
+				[arr[i], arr[idx]] = [arr[idx], arr[i]];
+			}
 
 			return answer;
 		}
