@@ -1,0 +1,68 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 1번째 풀이 (버블정렬 이용)
+		function solution(arr) {
+			let answer = arr;
+
+			// 이중 for문
+			// 버블정렬에서 i는 j의 범위 결정에만 사용되고 실제 비교에는 쓰이지 않음
+			for (let i = 0; i < arr.length - 1; i++) {
+				for (let j = 0; j < arr.length - i - 1; j++) {
+					// 비교하는 값이 둘다 양수이거나 또는 둘다 음수이면 자리 바꾸면 안 됨
+					// (문제: '양의정수와 음의정수 순서에는 변함이 없어야 한다')
+					if (arr[j] > 0 && arr[j + 1] < 0) {
+						[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+					}
+				}
+			}
+
+			return answer;
+		}
+
+		let arr = [1, 2, 3, -3, -2, 5, 6, -6];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 2번째 풀이 (단순한 push로 해결)
+		function solution(array) {
+			let answer = [];
+
+			// for-of문 2개
+			for (let x of array) {
+				if (x < 0) answer.push(x);
+			}
+
+			for (let x of array) {
+				if (x > 0) answer.push(x);
+			}
+
+			return answer;
+		}
+
+		let array = [1, 2, 3, -3, -2, 5, 6, -6];
+		console.log(solution(array));
+	</script>
+</body>
+
+</html>
