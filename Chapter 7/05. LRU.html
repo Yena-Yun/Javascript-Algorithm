@@ -9,16 +9,41 @@
 	<script>
 		// 1번째 풀이
 		function solution(size, arr) {
-			let answer; // Array.from
+			// Array.from + 0으로 초기화
+			let answer = Array.from({
+				length: size
+			}, () => 0);
 
 			// forEach
 			// pos 선언
 			// for문 1줄 + if문 1줄
 			// if문 안에 for문 + else문 안에 for문
+			arr.forEach(x => {
+				// -1(= 배열에 없는 경우)로 초기화된 변수
+				let pos = -1;
 
+				// hit인지 miss인지 알아보기
+				// arr에서 하나씩 꺼낸 값 x가 answer의 i번째와 동일할 때 pos에 해당 위치 저장
+				for (let i = 0; i < size; i++)
+					if (x === answer[i]) pos = i;
 
+				// miss인 경우
+				// pos가 -1 (배열에 없는 경우) -> 제일 뒤에서부터 당겨오기
+				if (pos === -1) {
+					for (let i = size - 1; i >= 1; i--) {
+						answer[i] = answer[i - 1];
+					}
+					answer[0] = x;
+				}
 
-
+				// hit인 경우
+				else {
+					for (let i = pos; i >= 1; i--) {
+						answer[i] = answer[i - 1];
+					}
+					answer[0] = x;
+				}
+			});
 
 			return answer;
 		}
@@ -43,25 +68,42 @@
 <body>
 	<script>
 		// 2번째 풀이
-		function solution(size, arr) {
-			let answer = [];
+		function solution(size, array) {
+			// Array.from + 0으로 초기화
+			let answer = Array.from({
+				length: size
+			}, () => 0);
 
 			// forEach
 			// pos 선언
 			// for문 1줄 + if문 1줄
-			// if문 안에 if문 1줄 + else문 안에 splice, unshift
+			// if문 안에 for문 + else문 안에 for문
+			array.forEach(x => {
+				// -1(= 배열에 없는 경우)로 초기화된 변수
+				let pos = -1;
 
+				// hit인지 miss인지 알아보기
+				// arr에서 하나씩 꺼낸 값 x가 answer의 i번째와 동일할 때 pos에 해당 위치 저장
+				for (let i = 0; i < size; i++)
+					if (x === answer[i]) pos = i; // miss인 경우 // pos가 -1 (배열에 없는 경우) -> 제일 뒤에서부터 당겨오기
+				if (pos === -1) {
+					answer.unshift(x);
+					if (answer.length > size) answer.pop();
+				}
 
-
-
-
-
+				// hit인 경우
+				else {
+					// pos부터 하나 지우기
+					answer.splice(pos, 1);
+					answer.unshift(x);
+				}
+			});
 
 			return answer;
 		}
 
-		let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
-		console.log(solution(5, arr));
+		let array = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+		console.log(solution(5, array));
 	</script>
 </body>
 
