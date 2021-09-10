@@ -8,24 +8,38 @@
 <body>
 	<script>
 		function solution(times) {
-			let answer; // JS의 최소값으로 선언
+			let answer = Number.MIN_SAFE_INTEGER; // JS의 최소값으로 선언
 			let T_line = [];
 
-			// for-of문
+			// for-of문 
+			// times 배열 안의 0,1번째 요소에 모두 's' 또는 'e' 부여해서 T_line 배열에 추가
+			for (let x of times) {
+				T_line.push([x[0], 's']);
+				T_line.push([x[1], 'e']);
+			}
+			console.log(T_line);
 
-			// for문 돌린 후 sort()
-			// sort 시 charCodeAt 활용 (연산)
+			// 이후 T_line 배열 sort
+			T_line.sort((a, b) => {
+				// 비교하는 문자가 한 글자인 경우 charCodeAt() 안에 인덱스 숫자 안 넣어도 됨
+				// T_line 배열의 앞 자리가 동일하면 => 뒷 자리 기준으로 정렬(charCodeAt 연산)
+				if (a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+				// 앞 자리가 다르면 => 앞 자리 기준으로 정렬
+				else return a[0] - b[0];
+			});
+			console.log(T_line);
 
-			// sort문 나와서 cnt 선언
-
-			// for-of문
-			// 안에 if-else문
-
-
-
-
-
-
+			// cnt 선언
+			let cnt = 0;
+			// for-of문 (T_line)
+			for (let x of T_line) {
+				// 뒷 자리가 s 이면 cnt + 1
+				if (x[1] === 's') cnt++;
+				// 뒷 자리가 e 이면 cnt - 1
+				else cnt--;
+				// answer와 cnt 중 더 큰 값으로 answer 업데이트
+				answer = Math.max(answer, cnt);
+			}
 
 			return answer;
 		}
