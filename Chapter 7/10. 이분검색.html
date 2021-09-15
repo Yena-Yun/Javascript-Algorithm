@@ -11,13 +11,29 @@
 			let answer;
 
 			// sort()
-			// lt, rt 선언 (둘이 많이 다름)
+			arr.sort((a, b) => a - b);
+
+			// lt, rt 선언
+			let lt = 0;
+			let rt = arr.length - 1;
+
 			// while문
-			// 안에 mid 선언
+			while (lt <= rt) {
+				// while 안에 mid 선언 (parseInt = Math.floor와 같은 역할)
+				let mid = parseInt((lt + rt) / 2);
 
-
-
-
+				// target 숫자가 mid번째 숫자와 같은 경우 (= 답을 찾음)
+				if (target === arr[mid]) {
+					// mid는 인덱스 값이므로 1을 더해서 answer에 넣기
+					answer = mid + 1;
+					// while문 종료
+					break;
+				}
+				// target 숫자가 mid번째 숫자보다 작은 경우
+				else if (target < arr[mid]) rt = mid - 1;
+				// target 숫자가 mid번째 숫자보다 큰 경우
+				else lt = mid + 1;
+			}
 
 			return answer;
 		}
