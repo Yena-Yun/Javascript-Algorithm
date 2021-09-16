@@ -9,26 +9,58 @@
 	<script>
 		// count 함수
 		function count(songs, capacity) {
-			let cnt = 1,
-				sum = 0;
+			// DVD 장수
+			let cnt = 1;
+			// 매 DVD에 저장되는 곡 길이의 합
+			let sum = 0;
 
 			// for-of문
+			for (let x of songs) {
+				// sum에 x를 더한 것이 capacity(mid)보다 크면
+				if (sum + x > capacity) {
+					// 해당 DVD에 더 이상 저장할 수 없음
+					// DVD 장수 늘리기
+					cnt++;
+					// sum은 해당 차례의 곡 길이(x)로 업데이트 
+					// (= 새로 늘린 DVD의 첫번째 곡을 미리 넣어주는 것)
+					sum = x;
+				}
+				// 합이 capacity보다 작으면
+				// sum에 x 계속 누적
+				else sum += x;
+			}
 
-
+			// 배열을 다 돌고난 후 최종 DVD 갯수 반환
 			return cnt;
 		}
 
 		// 본 함수
 		function solution(m, songs) {
 			let answer;
-			let lt; // 최대값
-			let rt; // reduce
+			// 배열 내에서 최대값인 요소 구할 때 
+			// 배열의 괄호를 벗기는 전개연산자 사용해야 에러 안남
+			let lt = Math.max(...songs); // 배열의 최대값
+			let rt = songs.reduce((a, b) => a + b, 0); // 배열 요소의 총합(reduce)
 
 			// while문
+			// (이분검색 while문의 조건문과 mid는 외우기)
+			while (lt <= rt) {
+				// mid = DVD 한 장의 용량(capacity)
+				let mid = parseInt((lt + rt) / 2);
 
+				// count 함수로 구한 최종 DVD 갯수가 
+				// 인자로 주어진 DVD 갯수(m)보다 작거나 '같으면'
+				if (count(songs, mid) <= m) {
+					// (같아진다는 건 답을 구했다는 것을 뜻함)
+					// 반환값을 mid(capacity)로 업데이트
+					answer = mid;
+					// rt에서 구하는 범위를 줄임
+					rt = mid - 1;
 
-
-
+					// 최종 DVD 갯수가 인자로 주어진 DVD 갯수보다 크면
+					// 아직 답이 아니라는 뜻
+				} else lt = mid + 1; // answer 업데이트 없이 lt에서 구하는 범위만 줄임
+			}
 
 			return answer;
 		}
