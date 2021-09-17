@@ -9,12 +9,25 @@
 	<script>
 		// count 함수
 		function count(stable, dist) {
-			// cnt, ep 선언
-			// for문
+			// cnt: 말의 갯수
+			let cnt = 1;
+			// ep(end position): 말이 들어간 위치
+			// 첫번째 말은 무조건 맨 왼쪽 좌표에 
+			let ep = stable[0];
 
+			// stable의 맨 앞은 정해졌으므로 1번째 인덱스부터 시작
+			for (let i = 1; i < stable.length; i++) {
+				// 첫번째 dist로 넘어온 mid는 5
+				//	=> 1에 첫번째 말 넣은 후 5는 무조건 건너뛰면 두번째 말은 8에 들어가게 되고 또 5를 건너뛰어야 하는데 9 이상으로는 없으므로 fail
+				if (stable[i] - ep >= dist) {
+					// 말을 추가하고
+					cnt++;
+					// 말을 stable의 i번째에 배치
+					ep = stable[i];
+				}
+			}
 
-
-
+			// 최종 말의 갯수 반환
 			return cnt;
 		}
 
@@ -23,19 +36,29 @@
 			let answer;
 
 			// sort()
-			// lt, rt 선언 (둘이 많이 다름)
+			stable.sort((a, b) => a - b);
+			// 정렬 후 stable => [1, 2, 4, 8, 9]
 
-
-
+			// lt, rt 선언
+			// lt = 두 말 사이 '거리'의 최소값 (배열의 맨 앞 1을 뜻하는 게 아님 -> 그냥 떨어질 수 있는 최소의 거리가 1)
+			let lt = 1;
+			// rt = 두 말 사이 '거리'의 최대값 (배열의 최대값이 9이므로 두 말이 9 이상 거리가 떨어질 수 없음)
+			let rt = stable[stable.length - 1];
 
 			// while문
 			// 안에 mid 선언 + if문
+			while (lt <= rt) {
+				let mid = parseInt((lt + rt) / 2);
+				// 첫 mid는 (1 + 9) / 2 이므로 5가 됨
 
-
-
-
-
-
+				// 반환되는 말의 갯수가 c마리 이상이어야 답이 될 수 있음
+				if (count(stable, mid) >= c) {
+					answer = mid;
+					// mid가 더 큰 경우는 볼 필요가 없으므로(거리가 더 넓어지면 말을 더 못 넣게 됨)
+					// lt만 늘려서 범위를 줄이기
+					lt = mid + 1;
+				} else rt = mid - 1;
+			}
 
 			return answer;
 		}
