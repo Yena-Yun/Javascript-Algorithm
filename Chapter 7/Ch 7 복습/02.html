@@ -1,0 +1,39 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>출력결과</title>
+</head>
+
+<body>
+	<script>
+		// 버블정렬: 서로 인접한 두 요소를 비교하여 오른쪽 값이 왼쪽보다 크면 교환
+		// 갈수록 뒷쪽이 먼저 정렬되어 고정됨 (선택정렬과 반대)
+		// 비교 시 매번 작을 때마다 교환하므로 교환 횟수가 많음 (성능 bad)
+		// j for문을 돌리는 범위가 중요
+
+		function solution(arr) {
+			// 얕은 복사
+			let answer = arr;
+
+			// 이중 for문
+			for (let i = 0; i < arr.length - 1; i++) {
+				// arr.length - 1 - 'i' (i가 0번째이면 arr.length - 1 - 0, i가 1번째이면 arr.length - 1 - 1, .. 등)
+				for (let j = 0; j < arr.length - i - 1; j++) {
+					// j번째 값이 그 다음 값인 j + 1번째보다 크면 
+					if (arr[j] > arr[j + 1]) {
+						// 서로 자리 바꾸기
+						[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+					}
+				}
+			}
+
+			return answer;
+		}
+
+		let arr = [13, 5, 11, 7, 23, 15];
+		console.log(solution(arr));
+	</script>
+</body>
+
+</html>
