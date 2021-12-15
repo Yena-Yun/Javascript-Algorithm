@@ -7,8 +7,14 @@
 
 <body>
 	<script>
+		// 소수: 1과 자기자신으로만 나누어떨어지는 수 && 1은 아님
 		function isPrime(num) {
+			// 예외처리 2가지: 1인 경우 제외, 자기자신 외에 특정 숫자로 나누어떨어지는 경우 제외
+			if (num === 1) return false;
 
+			for (let i = 2; i <= parseInt(Math.sqrt(num)); i++) {
+				if (num % i === 0) return false;
+			}
 
 			return true;
 		}
@@ -16,7 +22,24 @@
 		function solution(arr) {
 			let answer = [];
 
+			for (let x of arr) {
+				let res = 0; // res: 0으로 초기화
 
+				// x가 true일 동안(= false, 즉 0이 아닐 동안) 반복
+				while (x) {
+					// ** 숫자 뒤집기
+					let t = x % 10; // x의 일의 자리
+					console.log(t); // 2 3(3은 10으로 안 나눠지므로 나머지는 그대로 3)
+
+					res = res * 10 + t; // 십의 자리를 구한 뒤 일의 자리 값을 더함 (= 뒤집음)
+					console.log(res); // 2 23(res가 2인 상황이므로 2 * 10 + 3 = 23) => 소수가 됨 => 
+
+					x = parseInt(x / 10); // 십의 자리
+					console.log(x); // 3 0(3을 10으로 나눈 몫은 0) => x가 0이 되면 while문 종료
+				}
+
+				if (isPrime(res)) answer.push(res);
+			}
 
 			return answer;
 		}
@@ -40,7 +63,11 @@
 <body>
 	<script>
 		function isPrime(num) {
+			if (num === 1) return false;
 
+			for (let i = 2; i <= parseInt(Math.sqrt(num)); i++) {
+				if (num % i === 0) return false;
+			}
 
 			return true;
 		}
@@ -48,7 +75,12 @@
 		function solution(arr) {
 			let answer = [];
 
+			for (let x of arr) {
+				// Number화 하는 과정에서 앞자리 숫자 0이 제거됨
+				let res = Number(x.toString().split('').reverse().join(''));
 
+				if (isPrime(res)) answer.push(res);
+			}
 
 			return answer;
 		}

@@ -8,10 +8,11 @@
 <body>
 	<script>
 		function solution(n, arr) {
-			let answer = Number.MIN_SAFE_INTEGER;
-			let max = Number.MIN_SAFE_INTEGER;
+			let answer = Number.MIN_SAFE_INTEGER; // 출력할 값
+			let max = Number.MIN_SAFE_INTEGER; // 자릿수 합의 최대값
 
 			for (let x of arr) {
+				// sum과 tmp 선언
 				let sum = 0;
 				let tmp = x;
 
@@ -19,20 +20,21 @@
 				// tmp을 10으로 나눈 몫으로 업데이트하고 다시 while문을 돌린다
 				// tmp가 0(= false)이 되면 종료
 				while (tmp) {
-					sum += (tmp % 10); // 8, 2, 1
-					tmp = Math.floor(tmp / 10); // 12, 1, 0
+					sum += (tmp % 10); // 8, 2, 1: 각 차례의 일의 자리
+					tmp = Math.floor(tmp / 10); // 12, 1, 0 => 각 차례의 일의 자리를 빼고 난 후 남은 자릿수
 				}
 
-				// max보다 sum이 크면 
+				// sum이 max값보다 크면
 				if (sum > max) {
 					// max를 sum으로 업데이트하고
 					max = sum;
 					// answer에 해당 차례의 숫자를 넣는다
 					answer = x;
 
-					// max와 sum이 같으면 
+					// max와 sum이 같으면? => 원래 값이 더 큰 숫자를 반환
 				} else if (sum === max) {
-					// 해당 차례의 숫자(x)가 answer보다 큰 값인지 확인하고 크면 answer 업데이트
+					// 해당 차례의 숫자가 answer보다 큰 값인지 확인
+					// 더 크면 해당 숫자로 answer 업데이트
 					if (x > answer) answer = x;
 				}
 			}
@@ -59,10 +61,22 @@
 <body>
 	<script>
 		function solution(n, arr) {
-			let answer = Number.MIN_SAFE_INTEGER;
-			let max = Number.MIN_SAFE_INTEGER;
+			let answer = Number.MIN_SAFE_INTEGER; // 출력할 값
+			let max = Number.MIN_SAFE_INTEGER; // 자릿수 합의 최대값
 
+			for (let x of arr) {
+				// String.split => [] 반환
+				// Array.reduce: reduce도 문자열 배열에 적용할 수 있음 
+				// 단, 더해주는 값 b가 문자열이면 Number()로 바꿔주고 연산 (a는 무조건 초기값)
+				let sum = x.toString().split('').reduce((a, b) => a + Number(b), 0);
 
+				if (sum > max) {
+					max = sum;
+					answer = x;
+				} else if (sum === max) {
+					if (x > answer) answer = x;
+				}
+			}
 
 			return answer;
 		}
